@@ -1369,8 +1369,8 @@ body {
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 10px 8px; 
-  margin: 10px 0;
+  padding: 8px 5px; 
+  margin: 7px 0;
   color: #333;
   cursor: pointer;
   transition: background-color 0.3s, border 0.3s;

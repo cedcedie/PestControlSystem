@@ -7,10 +7,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../src/output.css">
 </head>
+<style>
+    
+</style>
 <body style="background-color: #8ecae6;">
+
     <div class="sidebar" id="menu">
         <h2>Aquarius Pest Control Services</h2>
-     
+
         <a href="proDashboard.html" class="menu-item" data-menu="Dashboard">
             <span class="icon">📋</span>
             <span>Dashboard</span>
@@ -40,23 +44,22 @@
             <span class="icon">📑</span>
             <span>Archives</span>
         </a>
+
         <div class="profile">
             <img src="https://via.placeholder.com/40" alt="Profile Picture">
             <div class="profile-info">
                 <span>Rodrigo</span>
                 <span class="role">Proprietor</span>
             </div>
-            <span class="logout-arrow">⮞</span> 
+            <span class="logout-arrow">⮞</span>
         </div>
     </div>
 
     <div class="content">
         <div class="table-container">
             <div class="header">
-                <h2>TECHNICIANS</h2>
-                
+                <h2>ARCHIVES</h2>
                 <div class="search-container">
-                    <button class="add-tech-btn">Add Technician</button> 
                     <input type="text" id="searchInput" placeholder="Search..." />
                     <div class="sort-container" id="sortButton">
                         <span>Sort by Newest</span>
@@ -64,43 +67,34 @@
                     </div>
                 </div>
             </div>
-            
             <table>
                 <thead>
                     <tr>
-                        <th>Technician Name</th>
-                        <th>Phone Number</th>
-                        <th>Scheduled On</th>
-                        <th>Work Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id="activityLog">
-                    <tr>
-                        <td>John Doe</td>
-                        <td>(123) 456-7890</td>
-                        <td>09/10/2024</td>
-                        <td><button class="status-btn active">Active</button></td>
-                        <td><button class="edit-btn">Edit</button></td>
-                    </tr>
-                    <tr>
-                        <td>Jane Smith</td>
-                        <td>(098) 765-4321</td>
-                        <td>09/08/2024</td>
-                        <td><button class="status-btn waiting">Waiting</button></td>
-                        <td><button class="edit-btn">Edit</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mike Johnson</td>
-                        <td>(555) 123-4567</td>
-                        <td>09/05/2024</td>
-                        <td><button class="status-btn inactive">Inactive</button></td>
-                        <td><button class="edit-btn">Edit</button></td>
-                    </tr>
+                        <th>Archive ID</th>
+                        <th>Date/Time Archived</th>
+                        <th>Role</th>
+                        <th>View</th>
+            
                 </tbody>
+            </thead>
+            <tbody id="Archives">
+                <tr>
+                    <td>001</td>
+                    <td>October 29, 2024 10:17:19 </td>
+                    <td>Technician</td>
+                    <td><button class="view-btn">View</button></td>
+   
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>November 3, 2024 10:17:19 </td>
+                    <td>Proprietor</td>
+                    <td><button class="view-btn">View</button></td>
+   
+                </tr>
             </table>
             <div class="pagination">
-                <span id="paginationInfo">Showing 1 to 3 of 3 entries</span>
+                <span id="paginationInfo">Showing 1 to 8 of 8 entries</span>
                 <div>
                     <button id="prevButton">Previous</button>
                     <button id="nextButton">Next</button>
@@ -110,5 +104,6 @@
     </div>
 
     <script src="proSidebar.js"></script>
+
 </body>
 </html>
