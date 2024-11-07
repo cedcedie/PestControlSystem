@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/output.css"/>
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .left-section {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-right: 20px;
+        }
+
+        .header h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        #calendar-container {
+            margin-top: 1rem;
+            background-color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        #calendar div {
+            padding: 10px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        #calendar div:nth-child(-n+7) {
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #333;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .bg-blue-500 {
+            background-color: #b4b7bb;
+            color: white;
+        }
+
+        .bg-yellow-500 {
+            background-color: #FFEB3B;
+            color: black;
+        }
+
+        .box {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .box h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .box ul li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .box button {
+            color: #1d4ed8;
+            cursor: pointer;
+            text-decoration: underline;
+            background: none;
+            border: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-close {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body class="bg-blue-200">
+    <div class="sidebar" id="menu">
+        <h2>Aquarius Pest Control Services</h2>
+        <a href="techSchedule.html" class="menu-item" data-menu="Schedule">
+            <span class="icon">📋</span>
+            <span>Schedule</span>
+        </a>
+        <a href="techReports.html" class="menu-item" data-menu="Reports">
+            <span class="icon">📋</span>
+            <span>Reports</span>
+        </a>
+        <div class="profile mt-6 flex items-center">
+            <img src="https://via.placeholder.com/40" alt="Profile Picture" class="rounded-full">
+            <div class="profile-info ml-3">
+                <span class="block font-semibold">Rodrigo</span>
+                <span class="role text-gray-400">Proprietor</span>
+            </div>
+            <span class="logout-arrow ml-4 cursor-pointer text-gray-500">⮞</span>
+        </div>
+    </div>
+
+    <div class="content ml-[250px] p-6">
+        <div class="table-container">
+            <div class="header"></div>
+            <div class="main-container">
+                <div class="left-section">
+                    <div class="header">
+                        <h2>Schedule</h2>
+                    </div>
+                    <div id="calendar-container">
+                        <div id="calendar"></div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="box">
+                        <h3>Notifications</h3>
+                        <ul>
+                            <li>
+                                <span>New customer appointment scheduled</span>
+                                <span class="text-sm text-gray-500">10 mins ago</span>
+                            </li>
+                            <li>
+                                <span>Report generated successfully</span>
+                                <span class="text-sm text-gray-500">2 hours ago</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="box">
+                        <h3>Past Customer History</h3>
+                        <ul>
+                            <li>
+                                <span>John Doe - 3 visits</span>
+                                <button>View Details</button>
+                            </li>
+                            <li>
+                                <span>Jane Smith - 5 visits</span>
+                                <button>View Details</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="flex justify-between items-center pb-3">
+                <p class="text-2xl font-bold">Selected Date</p>
+                <button id="closeModal" class="modal-close px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring">✕</button>
+            </div>
+            <div id="modalDate" class="text-xl font-semibold"></div>
+            <div id="scheduleInfo" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        function generateCalendar(year, month) {
+            const calendarElement = document.getElementById('calendar');
+            const firstDayOfMonth = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            calendarElement.innerHTML = '';
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const currentMonthElement = document.getElementById('currentMonth');
+            if (currentMonthElement) {
+                currentMonthElement.innerText = `${monthNames[month]} ${year}`;
+            }
+
+            const firstDayOfWeek = firstDayOfMonth.getDay();
+            const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            daysOfWeek.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'text-center font-semibold';
+                dayElement.innerText = day;
+                calendarElement.appendChild(dayElement);
+            });
+
+            for (let i = 0; i < firstDayOfWeek; i++) {
+                const emptyDayElement = document.createElement('div');
+                calendarElement.appendChild(emptyDayElement);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'text-center py-2 border cursor-pointer';
+                dayElement.innerText = day;
+
+                const yellowDates = [12, 17, 27];
+                if (yellowDates.includes(day)) {
+                    dayElement.classList.add('bg-yellow-500');
+                }
+
+                calendarElement.appendChild(dayElement);
+
+                dayElement.addEventListener('click', () => {
+                    if (yellowDates.includes(day)) {
+                        showModal(`${month + 1}/${day}/${year}`);
+                    }
+                });
+            }
+        }
+
+        function showModal(selectedDate) {
+            const modal = document.getElementById('myModal');
+            const modalDateElement = document.getElementById('modalDate');
+            const scheduleInfoElement = document.getElementById('scheduleInfo');
+            modalDateElement.innerText = selectedDate;
+
+            scheduleInfoElement.innerHTML = `<p>Event scheduled for this date: Meeting at 10:00 AM.</p>`;
+            modal.classList.add('active');
+        }
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            const modal = document.getElementById('myModal');
+            modal.classList.remove('active');
+        });
+
+        const currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth();
+        generateCalendar(currentYear, currentMonth);
+
+        const menuItems = document.querySelectorAll('.menu-item');
+        const activeMenu = localStorage.getItem('activeMenu') || 'customers';
+
+        menuItems.forEach(item => {
+            if (item.getAttribute('data-menu') === activeMenu) {
+                item.classList.add('active');
+            }
+        });
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                menuItems.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+                localStorage.setItem('activeMenu', this.getAttribute('data-menu'));
+            });
+        });
+    </script>
+</body>
+</html>
